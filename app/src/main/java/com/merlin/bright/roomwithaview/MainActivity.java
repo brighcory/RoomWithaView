@@ -23,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
-    public static WordViewModel mWordViewModel;
+    public WordViewModel mWordViewModel;
     WordListAdapter adapter;
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setWords(words);
             }
         });
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY));
-            mWordViewModel.insert(word);
+            mWordViewModel.insert(new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY)));
         } else {
             Toast.makeText(
                     getApplicationContext(),
